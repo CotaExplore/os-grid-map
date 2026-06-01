@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <title>OS Grid Map</title>
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css"/>
-<script src="config.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/html2canvas@1.4.1/dist/html2canvas.min.js"></script>
 <style>
@@ -86,7 +85,7 @@ body { font-family: sans-serif; }
 </div>
 <div id="status">Capturing map...</div>
 <script>
-var MB = MAPBOX_KEY;
+var MB = 'pk.eyJ1IjoiYXJkZW5yb2NrcyIsImEiOiJjbXB2c2FsYzkxb2hvMnNzZXNzeGxjazJ0In0.7w2FKRbgmRHs21GCXDe83Q';
 var mb = 'https://api.mapbox.com/styles/v1/mapbox/';
 var t  = '/tiles/256/{z}/{x}/{y}@2x?access_token=' + MB;
 var attr = '© Mapbox © OpenStreetMap';
@@ -316,7 +315,7 @@ function fetchW3W(lat,lng){
   if(w3wCache[key]){document.getElementById('ref-w3w').textContent=w3wCache[key];return;}
   clearTimeout(w3wTimer);
   w3wTimer=setTimeout(function(){
-    fetch('https://api.what3words.com/v3/convert-to-3wa?coordinates='+lat+','+lng+'&key='+W3W_KEY)
+    fetch('https://api.what3words.com/v3/convert-to-3wa?coordinates='+lat+','+lng+'&key=2V9C6CT1')
       .then(function(r){return r.json();})
       .then(function(d){
         var v=d.words?'///'+d.words:'need W3W key';
