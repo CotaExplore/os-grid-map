@@ -63,7 +63,6 @@ body { font-family: sans-serif; }
   <div class="ref">OS: <span id="ref-os">—</span></div>
   <div class="ref">MGRS: <span id="ref-mgrs">—</span></div>
   <div class="ref">Lat/Lng: <span id="ref-latlng">—</span></div>
-  <div class="ref">W3W: <span id="ref-w3w">—</span></div>
 </div>
 <div id="switcher">
   <button class="active" onclick="setLayer('streets')">Streets</button>
@@ -309,27 +308,11 @@ map.on('zoom',drawGrid);map.on('zoomend',drawGrid);map.on('resize',drawGrid);
 drawGrid();
 
 // ── Hover refs ──────────────────────────────────────────────────────────────
-var w3wTimer=null, w3wCache={};
-function fetchW3W(lat,lng){
-  var key=lat.toFixed(4)+','+lng.toFixed(4);
-  if(w3wCache[key]){document.getElementById('ref-w3w').textContent=w3wCache[key];return;}
-  clearTimeout(w3wTimer);
-  w3wTimer=setTimeout(function(){
-    fetch('https://api.what3words.com/v3/convert-to-3wa?coordinates='+lat+','+lng,{headers:{'X-Api-Key':'0U2L1WED'}})
-      .then(function(r){return r.json();})
-      .then(function(d){
-        var v=d.words?'///'+d.words:'need W3W key';
-        w3wCache[key]=v; document.getElementById('ref-w3w').textContent=v;
-      }).catch(function(){document.getElementById('ref-w3w').textContent='need W3W key';});
-  },400);
-}
-
 map.on('mousemove',function(e){
   var lat=e.latlng.lat, lng=e.latlng.lng;
   document.getElementById('ref-latlng').textContent=lat.toFixed(6)+', '+lng.toFixed(6);
   document.getElementById('ref-os').textContent=isInGB(lat,lng)?(latLngToOSRef(lat,lng)||'—'):'Outside GB';
   document.getElementById('ref-mgrs').textContent=latLngToMGRS(lat,lng)||'—';
-  fetchW3W(lat,lng);
 });
 
 function saveA4(){
