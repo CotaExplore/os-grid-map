@@ -315,7 +315,7 @@ function fetchW3W(lat,lng){
   if(w3wCache[key]){document.getElementById('ref-w3w').textContent=w3wCache[key];return;}
   clearTimeout(w3wTimer);
   w3wTimer=setTimeout(function(){
-    fetch('https://api.what3words.com/v3/convert-to-3wa?coordinates='+lat+','+lng,{headers:{'X-Api-Key':'IX2SSDNS'}})
+    fetch('https://api.what3words.com/v3/convert-to-3wa?coordinates='+lat+','+lng,{headers:{'X-Api-Key':'0U2L1WED'}})
       .then(function(r){return r.json();})
       .then(function(d){
         var v=d.words?'///'+d.words:'need W3W key';
