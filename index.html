@@ -260,6 +260,7 @@ function drawGrid() {
   gridCanvas.width=w; gridCanvas.height=h;
   var ctx=gridCanvas.getContext('2d');
   ctx.clearRect(0,0,w,h);
+  if(map.getZoom() < 14) return;
   var center=map.getCenter();
   var gsLat=metersToLat(gridSize), gsLng=metersToLng(gridSize,center.lat);
   var bounds=map.getBounds();
