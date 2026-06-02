@@ -236,7 +236,7 @@ function setLayer(name) {
 function doSearch() {
   var q = document.getElementById('search-input').value.trim();
   if (!q) return;
-  var coords = q.replace(/[°NSEW]/gi,'').match(/^(-?\d+\.?\d*)[,\s]+(-?\d+\.?\d*)$/);
+  var coords = q.replace(/[°NSEW]/gi,'').trim().match(/^(-?\d+\.?\d*)[,\s]+(-?\d+\.?\d*)$/);
   if (coords) { map.setView([parseFloat(coords[1]), parseFloat(coords[2])], 17); return; }
   fetch('https://api.mapbox.com/geocoding/v5/mapbox.places/'+encodeURIComponent(q)+'.json?access_token='+MB+'&limit=1')
     .then(function(r){ return r.json(); })
